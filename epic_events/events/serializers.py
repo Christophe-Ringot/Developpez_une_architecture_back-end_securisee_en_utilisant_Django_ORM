@@ -1,10 +1,11 @@
 from rest_framework import serializers
 
-from .models import Customer
+from .models import Event
 
-class CustomerSerializer(serializers.ModelSerializer):
+
+class EventSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Customer
+        model = Event
         fields = "__all__"
 
     def create(self, validated_data):

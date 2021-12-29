@@ -6,9 +6,8 @@ from .serializer import CustomerSerializer
 
 # Create your views here.
 
-class CustomerViewset(viewsets.ModelViewset):
+class CustomerViewset(viewsets.ModelViewSet):
 
-    queryset = Customer.object.all()
-    serialize_class = CustomerSerializer
-    permission_classes = [CustomerPermission | permissions.IsAdminUser]
+    queryset = Customer.objects.all()
+    serializer_class = CustomerSerializer
     filterset_fields = ['first_name', 'company_name']
