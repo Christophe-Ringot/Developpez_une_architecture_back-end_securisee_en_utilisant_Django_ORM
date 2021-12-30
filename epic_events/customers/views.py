@@ -14,3 +14,10 @@ class CustomerViewset(viewsets.ModelViewSet):
     permission_class = [CustomerPermission & permissions.IsAuthenticated]
     filterset_fields = ['first_name', 'company_name']
     search_fields = ['first_name', 'last_name']
+
+    def get_queryset(self, *args, **kwargs):
+        queryset = self.get_queryset().filter\
+            (support_contact=self.request.user)
+        serializer = CustomerSerializer(queryset,
+                                     many=True, context={'request': request})
+        return Response(serializer.data)
