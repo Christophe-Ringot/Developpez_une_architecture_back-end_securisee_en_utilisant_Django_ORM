@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 import contracts.models
 
 # Create your models here.
@@ -11,4 +12,7 @@ class Customer(models.Model):
     company_name = models.CharField(max_length=250)
     date_created = models.DateTimeField(auto_now_add=True)
     date_update = models.DateTimeField(auto_now=True)
+    sales_contract = models.ForeignKey(to=settings.AUTH_USER_MODEL,
+                                       on_delete=models.CASCADE, blank=True,
+                                       null=True)
 
