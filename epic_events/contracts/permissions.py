@@ -1,21 +1,18 @@
-from rest_framework import permissions
+from rest_framework.permissions import DjangoModelPermissions, BasePermission
 
 
-class ContractPermission(permissions.BasePermission):
-    def has_permission(self, request, view):
-        if request.user.groups.filter(name="Sales").exists():
-            return True
-        if request.user.groups.filter(name="Support").exists():
-            return request.method in permissions.SAFE_METHODS
-        return False
+class ActualDjangoModelPermissions(DjangoModelPermissions):
+
+    def __init__(self):
+        self.perms_map['GET'] = ['%(app_label)s.view_%(model_name)s']
+        self.perms_map['HEAD'] = ['%(app_label)s.view_%(model_name)s']
+        self.perms_map['OPTIONS'] = ['%(app_label)s.view_%(model_name)s']
+
+
+class ContractPermission(BasePermission):
 
     def has_object_permission(self, request, view, obj):
-        if request.user.groups.filter(name="Sales").exists():
-            if (request.user == obj.sales_contact and
-                    obj.ratified is False):
-                return True
-            else:
-                return request.method in permissions.SAFE_METHODS
-        if request.user.groups.filter(name="Support").exists():
-            return request.method in permissions.SAFE_METHODS
-        return False
+        if request.user.groups.filter(
+                name__iexact="sales").exists() and obj.sales_contact != request.user:
+            return False
+        return True

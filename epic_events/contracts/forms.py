@@ -1,5 +1,5 @@
 from .models import Contract
-from customers.models import Customer
+from ..customers.models import Customer
 from django.forms import ModelForm
 from django.contrib.auth.models import User
 

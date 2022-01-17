@@ -3,7 +3,7 @@ from rest_framework import viewsets, permissions
 
 from .models import Contract
 from .serializer import ContractSerializer
-from .permissions import ContractPermission
+from .permissions import ContractPermission, ActualDjangoModelPermissions
 
 # Create your views here.
 
@@ -11,11 +11,7 @@ class ContractViewset(viewsets.ModelViewSet):
 
     queryset = Contract.objects.all()
     serializer_class = ContractSerializer
-    permission_classes = [(ContractPermission & permissions.IsAuthenticated)]
+    permission_classes = [(ContractPermission & ActualDjangoModelPermissions)]
 
-    def get_queryset(self, *args, **kwargs):
-        queryset = self.get_queryset().filter\
-            (support_contact=self.request.user)
-        serializer = ContractSerializer(queryset,
-                                     many=True, context={'request': request})
-        return Response(serializer.data)
+    def get_queryset(self):
+        return Contract.objects.all()
