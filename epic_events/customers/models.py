@@ -9,6 +9,7 @@ class Customer(models.Model):
     email = models.EmailField(max_length=100)
     phone = models.CharField(max_length=20)
     mobile = models.CharField(max_length=20)
+    status = models.TextField(default="potential", choices=(("prospect", "prospect"),("acquired", "acquired")))
     company_name = models.CharField(max_length=250)
     date_created = models.DateTimeField(auto_now_add=True)
     date_update = models.DateTimeField(auto_now=True)

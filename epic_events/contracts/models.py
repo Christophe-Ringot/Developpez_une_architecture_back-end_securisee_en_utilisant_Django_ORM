@@ -8,9 +8,6 @@ import datetime
 # Create your models here.
 class Contract(models.Model):
 
-    def __str__(self):
-        return f'Contract for: {self.customer}'
-
     sales_contract = models.ForeignKey(User, on_delete=models.CASCADE,
                                        null=False, blank=False)
     customer =  models.ForeignKey(Customer, on_delete=models.CASCADE,
