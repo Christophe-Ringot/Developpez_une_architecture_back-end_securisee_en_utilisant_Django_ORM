@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from customers.models import Customer
 from contracts.models import Contract
+from users.models import User
 from django.utils import timezone, dateformat
 
 # Create your models here.
@@ -11,8 +12,7 @@ class Event(models.Model):
                                related_name='events')
     date_created = models.DateTimeField(default=timezone.now)
     date_updated = models.DateTimeField(default=timezone.now)
-    support_contact = models.ForeignKey(to=settings.AUTH_USER_MODEL, limit_choices_to={'groups__name': "Support"},
-        on_delete=models.CASCADE, blank=True, null=True)
+    support_contact = models.ForeignKey(User,on_delete=models.CASCADE, blank=True, null=True)
     status = models.TextField(choices=(("on_going", "On going"),("finished", "Finished")))
     attendees = models.IntegerField(default=0)
     event_date = models.DateTimeField(default=timezone.now)

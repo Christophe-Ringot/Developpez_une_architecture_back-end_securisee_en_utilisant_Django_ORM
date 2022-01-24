@@ -20,3 +20,6 @@ class Contract(models.Model):
                                  verbose_name="Contract signed ?")
     amount = models.FloatField(null=False, blank=False)
     payment_due = models.DateTimeField(null=False, blank=False)
+
+    def __str__(self):
+        return f"{self.customer}'s contract"
