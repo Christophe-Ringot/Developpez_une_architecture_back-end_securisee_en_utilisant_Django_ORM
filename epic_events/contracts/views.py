@@ -1,17 +1,21 @@
-from django.shortcuts import render
 from rest_framework import viewsets, permissions
+from rest_framework.decorators import action
+from rest_framework.response import Response
 
 from .models import Contract
-from .serializer import ContractSerializer
+from .serializers import ContractSerializer
 from .permissions import ContractPermission, ActualDjangoModelPermissions
 
 # Create your views here.
 
-class ContractViewset(viewsets.ModelViewSet):
+class ContractViewSet(viewsets.ModelViewSet):
 
     queryset = Contract.objects.all()
     serializer_class = ContractSerializer
-    permission_classes = [(ContractPermission & ActualDjangoModelPermissions)]
+    permission_classes = [ContractPermission, ActualDjangoModelPermissions]
 
-    def get_queryset(self):
-        return Contract.objects.all()
+    @action(detail=False, methods=['GET'])
+    def my_own_contracts(self, request, **kwargs):
+        queryset = self.get_queryset().filter(sales_contact=self.request.user)
+        serializer = ContractSerializer(queryset, many=True, context={'request': request})
+        return Response(serializer.data)

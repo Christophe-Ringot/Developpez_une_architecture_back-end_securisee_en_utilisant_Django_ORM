@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.conf import settings
 from customers.models import Customer
 from django.utils import timezone
 import datetime
@@ -8,8 +8,8 @@ import datetime
 # Create your models here.
 class Contract(models.Model):
 
-    sales_contract = models.ForeignKey(User, on_delete=models.CASCADE,
-                                       null=False, blank=False)
+    sales_contact = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
+        blank=True, null=True)
     customer =  models.ForeignKey(Customer, on_delete=models.CASCADE,
                                 null=False, blank=False)
     date_created = models.DateTimeField(default=timezone.now,

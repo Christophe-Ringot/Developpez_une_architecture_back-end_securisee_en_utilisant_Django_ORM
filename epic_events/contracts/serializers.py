@@ -11,6 +11,10 @@ class ContractSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         info = Contract.objects.create(**validated_data)
-        info.sales_contract = self.context["request"].user
+        info.sales_contact = self.context["request"].user
+        Event.objects.create(event_contract=info, client=info.client)
+        client = Client.objects.get(id=info.client_id)
+        client.converted = True
+        client.save()
         info.save()
         return info

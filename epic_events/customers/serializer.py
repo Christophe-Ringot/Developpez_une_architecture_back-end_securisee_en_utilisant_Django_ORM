@@ -10,6 +10,6 @@ class CustomerSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         info = Customer.objects.create(**validated_data)
-        info.sales_contract = self.context["request"].user
+        info.sales_contact = self.context["request"].user
         info.save()
         return info

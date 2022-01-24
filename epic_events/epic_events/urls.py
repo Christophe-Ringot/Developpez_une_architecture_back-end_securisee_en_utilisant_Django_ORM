@@ -19,17 +19,17 @@ from rest_framework_nested import routers
 from rest_framework_simplejwt.views import TokenObtainPairView,\
     TokenRefreshView
 
-from contracts import views as constracts_view
+from contracts import views as contracts_view
 from users import views as users_views
 from customers import views as customers_view
 from events import views as events_views
 
 router = routers.DefaultRouter()
 
-router.register(r'contracts', constracts_view.ContractViewset)
+router.register(r'contracts', contracts_view.ContractViewSet)
 router.register(r'users', users_views.UserViewSet)
-router.register(r'customers', customers_view.CustomerViewset)
-router.register(r'events', events_views.EventViewset)
+router.register(r'customers', customers_view.CustomerViewSet)
+router.register(r'events', events_views.EventViewSet)
 
 
 urlpatterns = [
