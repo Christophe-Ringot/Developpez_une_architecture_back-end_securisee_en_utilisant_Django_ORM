@@ -5,7 +5,6 @@ from django.utils import timezone
 import datetime
 
 
-# Create your models here.
 class Contract(models.Model):
 
     sales_contact = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE,

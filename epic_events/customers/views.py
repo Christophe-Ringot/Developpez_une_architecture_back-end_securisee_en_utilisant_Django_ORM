@@ -6,7 +6,6 @@ from .models import Customer
 from .serializer import CustomerSerializer
 from .permissions import CustomerPermission
 
-# Create your views here.
 
 class CustomerViewSet(viewsets.ModelViewSet):
 

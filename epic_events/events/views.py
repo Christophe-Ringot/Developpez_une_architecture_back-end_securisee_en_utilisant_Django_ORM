@@ -6,7 +6,6 @@ from .models import Event
 from .serializers import EventSerializer
 from .permissions import EventPermission
 
-# Create your views here.
 
 class EventViewSet(viewsets.ModelViewSet):
 

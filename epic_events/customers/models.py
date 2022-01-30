@@ -2,7 +2,6 @@ from django.db import models
 from django.conf import settings
 
 
-# Create your models here.
 class Customer(models.Model):
     first_name = models.CharField(max_length=30, verbose_name='First name')
     last_name = models.CharField(max_length=30, verbose_name='Last name')

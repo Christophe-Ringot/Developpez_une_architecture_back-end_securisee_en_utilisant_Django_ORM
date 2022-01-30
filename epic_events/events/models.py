@@ -1,11 +1,9 @@
 from django.db import models
-from django.conf import settings
 from customers.models import Customer
-from contracts.models import Contract
 from users.models import User
-from django.utils import timezone, dateformat
+from django.utils import timezone
 
-# Create your models here.
+
 class Event(models.Model):
 
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE,
@@ -13,7 +11,7 @@ class Event(models.Model):
     date_created = models.DateTimeField(default=timezone.now)
     date_updated = models.DateTimeField(default=timezone.now)
     support_contact = models.ForeignKey(User,on_delete=models.CASCADE, blank=True, null=True)
-    status = models.TextField(choices=(("on_going", "On going"),("finished", "Finished")))
+    status = models.TextField(choices=(("on_going", "On going"), ("finished", "Finished")))
     attendees = models.IntegerField(default=0)
     event_date = models.DateTimeField(default=timezone.now)
     notes = models.TextField(max_length=2500, blank=True)

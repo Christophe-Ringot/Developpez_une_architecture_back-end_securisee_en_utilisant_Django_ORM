@@ -6,7 +6,6 @@ from .models import Contract
 from .serializers import ContractSerializer
 from .permissions import ContractPermission
 
-# Create your views here.
 
 class ContractViewSet(viewsets.ModelViewSet):
 

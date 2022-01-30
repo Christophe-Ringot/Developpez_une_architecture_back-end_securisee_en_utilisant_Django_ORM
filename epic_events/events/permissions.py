@@ -15,7 +15,7 @@ class EventPermission(permissions.BasePermission):
         if request.user.groups.filter(name="Sales").exists():
             return True
         if request.user.groups.filter(name="Support").exists():
-            if request.user == obj.support_contact :
+            if request.user == obj.support_contact:
                 return request.method in [
                     "GET", "PUT", "PATCH", "OPTIONS", "HEAD"]
             else:

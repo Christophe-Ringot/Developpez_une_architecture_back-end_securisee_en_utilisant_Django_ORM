@@ -7,6 +7,7 @@ from .models import User
 from .serializer import UserSerializer, GroupSerializer
 from .permissions import UserPermission, GroupPermission
 
+
 class UserViewSet(viewsets.ModelViewSet):
 
     queryset = User.objects.all()
