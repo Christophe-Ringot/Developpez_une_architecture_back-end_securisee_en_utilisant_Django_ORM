@@ -24,6 +24,9 @@ from users import views as users_views
 from customers import views as customers_view
 from events import views as events_views
 
+def trigger_error(request):
+    division_by_zero = 1 / 0
+
 router = routers.DefaultRouter()
 
 router.register(r'users', users_views.UserViewSet)
@@ -36,6 +39,7 @@ router.register(r'events', events_views.EventViewSet)
 urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
+    path('sentry-debug/', trigger_error),
     path('api-auth/', include('rest_framework.urls')),
     path('api/token/', TokenObtainPairView.as_view(),
          name='token_obtain_pair'),
