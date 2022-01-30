@@ -6,7 +6,7 @@ class CustomerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Customer
         fields = "__all__"
-        read_only_fields = ['sales_contract']
+        read_only_fields = ['sales_contact']
 
     def create(self, validated_data):
         info = Customer.objects.create(**validated_data)

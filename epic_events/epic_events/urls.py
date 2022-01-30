@@ -26,9 +26,9 @@ from events import views as events_views
 
 router = routers.DefaultRouter()
 
-router.register(r'contracts', contracts_view.ContractViewSet)
 router.register(r'users', users_views.UserViewSet)
 router.register(r'group', users_views.GroupViewSet)
+router.register(r'contracts', contracts_view.ContractViewSet)
 router.register(r'customers', customers_view.CustomerViewSet)
 router.register(r'events', events_views.EventViewSet)
 

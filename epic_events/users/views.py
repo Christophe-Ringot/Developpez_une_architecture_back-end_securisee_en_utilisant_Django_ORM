@@ -5,13 +5,13 @@ from django.contrib.auth.models import Group
 
 from .models import User
 from .serializer import UserSerializer, GroupSerializer
-from .permissions import UserPermission, GroupPermission, ActualDjangoModelPermissions
+from .permissions import UserPermission, GroupPermission
 
 class UserViewSet(viewsets.ModelViewSet):
 
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [UserPermission, ActualDjangoModelPermissions]
+    permission_classes = [UserPermission]
 
     @action(detail=False, methods=['GET'])
     def my_own_user(self, request, **kwargs):

@@ -17,5 +17,3 @@ class Event(models.Model):
     attendees = models.IntegerField(default=0)
     event_date = models.DateTimeField(default=timezone.now)
     notes = models.TextField(max_length=2500, blank=True)
-    contract = models.OneToOneField(Contract, on_delete=models.CASCADE,
-                                    null=True, blank=True)
