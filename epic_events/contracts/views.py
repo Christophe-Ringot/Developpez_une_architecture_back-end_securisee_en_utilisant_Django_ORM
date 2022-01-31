@@ -14,7 +14,7 @@ class ContractViewSet(viewsets.ModelViewSet):
     permission_classes = [ContractPermission]
 
     @action(detail=False, methods=['GET'])
-    def my_own_contracts(self, request, **kwargs):
+    def my_contracts(self, request, **kwargs):
         queryset = self.get_queryset().filter(sales_contact=self.request.user)
         serializer = ContractSerializer(queryset, many=True, context={'request': request})
         return Response(serializer.data)
