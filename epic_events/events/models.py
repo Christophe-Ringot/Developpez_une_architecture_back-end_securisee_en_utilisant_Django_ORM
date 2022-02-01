@@ -1,5 +1,6 @@
 from django.db import models
 from customers.models import Customer
+from contracts.models import Contract
 from users.models import User
 from django.utils import timezone
 
@@ -15,3 +16,4 @@ class Event(models.Model):
     attendees = models.IntegerField(default=0)
     event_date = models.DateTimeField(default=timezone.now)
     notes = models.TextField(max_length=2500, blank=True)
+    contract = models.OneToOneField(Contract, on_delete=models.CASCADE, blank=True, null=True)

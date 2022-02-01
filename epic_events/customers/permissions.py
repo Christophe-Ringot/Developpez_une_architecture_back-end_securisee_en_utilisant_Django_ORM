@@ -12,7 +12,10 @@ class CustomerPermission(permissions.BasePermission):
 
     def has_object_permission(self, request, view, obj):
         if request.user.groups.filter(name="Sales").exists():
-            return request.method in ["GET", "PUT", "PATCH", "OPTIONS", "HEAD"]
+            if request.user == obj.sales_contact:
+                return request.method in ["GET", "PUT", "PATCH", "OPTIONS", "HEAD","DELETE"]
+            else:
+                return request.method in permissions.SAFE_METHODS
         if request.user.groups.filter(name="Support").exists():
             return request.method in permissions.SAFE_METHODS
         return False

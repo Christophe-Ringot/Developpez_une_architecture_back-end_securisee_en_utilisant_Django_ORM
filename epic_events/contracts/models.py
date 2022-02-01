@@ -18,7 +18,7 @@ class Contract(models.Model):
     status = models.BooleanField(default=False,
                                  verbose_name="Contract signed ?")
     amount = models.FloatField(null=False, blank=False)
-    payment_due = models.DateTimeField(null=False, blank=False)
+    payment_due = models.DateTimeField(default=timezone.now, null=False, blank=False)
 
     def __str__(self):
         return f"{self.customer}'s contract"
