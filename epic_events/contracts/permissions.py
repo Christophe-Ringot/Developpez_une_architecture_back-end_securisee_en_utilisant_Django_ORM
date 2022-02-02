@@ -13,8 +13,7 @@ class ContractPermission(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         if request.user.groups.filter(name="Sales").exists():
             if request.user == obj.sales_contact:
-                if request.user == obj.sales_contact:
-                    return True
+                return True
             else:
                 return request.method in permissions.SAFE_METHODS
         if request.user.groups.filter(name="Support").exists():
